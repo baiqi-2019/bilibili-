@@ -8,13 +8,61 @@
   <link rel="stylesheet/less" href="../common/reset.less">
   <link rel="stylesheet/less" href="../common/common.less">
   <link rel="stylesheet/less" href="area-header.less">
+  <link rel="stylesheet" href="../src/font_rightArrow/iconfont.css">
   <script src="../js/lessc.js"></script>
 </head>
 <body>
   <div class="area-header">
     <div class="left">
+      <img class="icon" src="../src/imgages/svg01.png"></img>
+      <a href="#" class="title"><span>番剧</span></a>
+      <div class="track-switch">
+        <div class="track-switch-bar">
+          <div class="switch-bar"></div>
+        </div>
+        <div class="track-switch-wrap">
+          <button class="is-active" data-track-x="0" data-track-width="86">最近更新</button>
+          <button data-track-x="86" data-track-width="58">周一</button>
+          <button data-track-x="144" data-track-width="58">周二</button>
+          <button data-track-x="202" data-track-width="58">周三</button>
+          <button data-track-x="260" data-track-width="58">周四</button>
+          <button data-track-x="318" data-track-width="58">周五</button>
+          <button data-track-x="376" data-track-width="58">周六</button>
+          <button data-track-x="434" data-track-width="58">周日</button>
+        </div>
+      </div>
     </div>
-    <div class="right"></div>
+    <div class="right">
+      <a class="primary-btn timeline-btn" href="#" >
+        <span>新番时间表</span>
+        <i class="iconfont icon-right-arrow"></i>
+      </a>
+      <a class="primary-btn see-more" href="#">
+        <span>查看更多</span>
+        <i class="iconfont icon-right-arrow"></i>
+      </a>
+    </div>
   </div>
+  <script>
+    let trackSwitchs = document.getElementsByClassName("track-switch"); 
+    for (let j = 0; j < trackSwitchs.length; j++) {
+      let trackSwitch = trackSwitchs[j];
+      for (let k = 0; k < trackSwitch.children[1].children.length; k++) {
+        let button = trackSwitch.children[1].children[k];
+        button.addEventListener("click",function () {
+          let trackX = button.dataset.trackX;
+          let trackWidth = button.dataset.trackWidth;
+          trackSwitch.style = `--track-x:${trackX}px;--track-width:${trackWidth}px;`
+          button.classList.add("is-active");
+          for (let l = 0; l < trackSwitch.children[1].children.length; l++) {
+            let button = trackSwitch.children[1].children[l]
+           if( l !== k){
+              button.classList.remove("is-active");
+           }
+          }
+       })
+      } 
+    }
+  </script>
 </body>
 </html>
